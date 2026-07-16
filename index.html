@@ -3,16 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jogo da Memória - Encontre os pares de cartas no menor tempo possível">
+    <meta name="theme-color" content="#7303c0">
     <title>Jogo da Memória</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
     <link rel="stylesheet" href="./src/styles/reset.css">
     <link rel="stylesheet" href="./src/styles/main.css">
 </head>
 <body>
-    <div class="container">
-        <h2>JOGO DA MEMÓRIA</h2>
-        <div class="game"></div>
-        <button class="reset" onclick="window.location.reload()">RESET GAME</button>
+    <main class="container" role="main">
+        <header class="header">
+            <h1 class="title">Jogo da Memória</h1>
+            <div class="stats" role="status" aria-live="polite">
+                <div class="stat">
+                    <span class="stat-icon" aria-hidden="true">🎯</span>
+                    <span class="stat-label">Jogadas</span>
+                    <span class="stat-value" id="moves" aria-label="Número de jogadas">0</span>
+                </div>
+                <div class="stat stat--timer">
+                    <span class="stat-icon" aria-hidden="true">⏱️</span>
+                    <span class="stat-label">Tempo</span>
+                    <span class="stat-value" id="timer" aria-label="Tempo decorrido">00:00</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-icon" aria-hidden="true">🃏</span>
+                    <span class="stat-label">Pares</span>
+                    <span class="stat-value" id="pairs" aria-label="Pares encontrados">0/8</span>
+                </div>
+            </div>
+            <div class="progress-wrapper">
+                <div class="progress-label">
+                    <span>Progresso</span>
+                    <span id="progress-pct">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" data-progress="0"></div>
+                </div>
+            </div>
+        </header>
+
+        <section class="controls" aria-label="Controles do jogo">
+            <fieldset class="difficulty-group">
+                <legend class="sr-only">Dificuldade</legend>
+                <div class="difficulty-options" id="difficulty-options">
+                    <div class="difficulty-slider" id="difficulty-slider"></div>
+                    <button class="difficulty-btn active" data-size="4x4" aria-pressed="true">4×4</button>
+                    <button class="difficulty-btn" data-size="4x3" aria-pressed="false">4×3</button>
+                    <button class="difficulty-btn" data-size="5x4" aria-pressed="false">5×4</button>
+                </div>
+            </fieldset>
+        </section>
+
+        <section class="game-wrapper" aria-label="Tabuleiro do jogo">
+            <div class="game" id="game" role="grid" aria-label="Tabuleiro de cartas"></div>
+        </section>
+
+        <button class="reset" id="reset-btn" type="button" aria-label="Reiniciar jogo">
+            Reiniciar Jogo
+        </button>
+    </main>
+
+    <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+        <div class="modal">
+            <span class="modal-emoji" aria-hidden="true">🎉</span>
+            <h2 class="modal-title" id="modal-title">Parabéns!</h2>
+            <p class="modal-text">Você encontrou todos os pares!</p>
+            <div class="modal-record" id="modal-record">🏆 Novo Recorde!</div>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <span class="modal-stat-label">Jogadas</span>
+                    <span class="modal-stat-value" id="final-moves">0</span>
+                </div>
+                <div class="modal-stat">
+                    <span class="modal-stat-label">Tempo</span>
+                    <span class="modal-stat-value" id="final-time">00:00</span>
+                </div>
+            </div>
+            <div class="modal-stars" id="modal-stars" aria-label="Avaliação"></div>
+            <div class="modal-share">
+                <button class="modal-btn modal-btn--secondary" id="share-btn" type="button" aria-label="Compartilhar resultado">
+                    📤 Compartilhar
+                </button>
+                <button class="modal-btn" id="play-again-btn" type="button">
+                    Jogar Novamente
+                </button>
+            </div>
+        </div>
     </div>
+
+    <div class="confetti-container" id="confetti-container" aria-hidden="true"></div>
+
+    <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
     <script src="./src/scripts/engine.js" defer></script>
 </body>
 </html>
