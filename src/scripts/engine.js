@@ -324,22 +324,23 @@
        Tilt 3D Effect
        ======================================== */
     function initTilt(card) {
+        var inner = card.querySelector(".card-inner");
         card.addEventListener("mousemove", function (e) {
             if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-            card.style.setProperty("--tx", rotateX + "deg");
-            card.style.setProperty("--ty", rotateY + "deg");
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var centerX = rect.width / 2;
+            var centerY = rect.height / 2;
+            var rotateX = ((y - centerY) / centerY) * -10;
+            var rotateY = ((x - centerX) / centerX) * 10;
+            inner.style.setProperty("--tx", rotateX + "deg");
+            inner.style.setProperty("--ty", rotateY + "deg");
         });
 
         card.addEventListener("mouseleave", function () {
-            card.style.setProperty("--tx", "0deg");
-            card.style.setProperty("--ty", "0deg");
+            inner.style.setProperty("--tx", "0deg");
+            inner.style.setProperty("--ty", "0deg");
         });
     }
 
@@ -400,8 +401,9 @@
         }
 
         playFlipSound();
-        card.style.setProperty("--tx", "0deg");
-        card.style.setProperty("--ty", "0deg");
+        var inner = card.querySelector(".card-inner");
+        inner.style.setProperty("--tx", "0deg");
+        inner.style.setProperty("--ty", "0deg");
         card.classList.add("flipped");
         card.setAttribute("aria-label", `Carta, ${card.dataset.emoji}`);
         openCards.push(card);
@@ -442,10 +444,12 @@
                 setTimeout(function () {
                     card1.classList.remove("flipped", "shake");
                     card2.classList.remove("flipped", "shake");
-                    card1.style.setProperty("--tx", "0deg");
-                    card1.style.setProperty("--ty", "0deg");
-                    card2.style.setProperty("--tx", "0deg");
-                    card2.style.setProperty("--ty", "0deg");
+                    var inner1 = card1.querySelector(".card-inner");
+                    var inner2 = card2.querySelector(".card-inner");
+                    inner1.style.setProperty("--tx", "0deg");
+                    inner1.style.setProperty("--ty", "0deg");
+                    inner2.style.setProperty("--tx", "0deg");
+                    inner2.style.setProperty("--ty", "0deg");
                     card1.setAttribute("aria-label", "Carta, oculta");
                     card2.setAttribute("aria-label", "Carta, oculta");
                     openCards = [];

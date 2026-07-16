@@ -432,26 +432,18 @@ body::after {
 /* ========================================
    Card
    ======================================== */
-@keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: perspective(600px) scale(0.5) rotateY(90deg);
-    }
-    to {
-        opacity: 1;
-        transform: perspective(600px) rotateX(0deg) rotateY(0deg);
-    }
-}
-
 .card {
     position: relative;
     width: var(--card-size);
     height: var(--card-size);
     cursor: pointer;
     transform-style: preserve-3d;
-    transform: perspective(600px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
-    transition: transform 0.25s ease;
-    animation: cardAppear 0.4s ease backwards;
+    animation: cardAppear 0.5s ease both;
+}
+
+@keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.6); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .card:nth-child(1) { animation-delay: 0.02s; }
@@ -486,7 +478,8 @@ body::after {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.35s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: perspective(600px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
 }
 
 .card .card-front,
@@ -550,11 +543,11 @@ body::after {
    Card States
    ======================================== */
 .card.flipped .card-inner {
-    transform: rotateY(180deg);
+    transform: perspective(600px) rotateX(0deg) rotateY(180deg);
 }
 
 .card.matched .card-inner {
-    transform: rotateY(180deg);
+    transform: perspective(600px) rotateX(0deg) rotateY(180deg);
 }
 
 .card.matched .card-front {
@@ -588,10 +581,10 @@ body::after {
 }
 
 @keyframes matchPulse {
-    0% { transform: perspective(600px) scale(1); }
-    30% { transform: perspective(600px) scale(1.1); }
-    60% { transform: perspective(600px) scale(0.95); }
-    100% { transform: perspective(600px) scale(1); }
+    0% { scale: 1; }
+    30% { scale: 1.1; }
+    60% { scale: 0.95; }
+    100% { scale: 1; }
 }
 
 .card.shake .card-inner {
@@ -599,11 +592,11 @@ body::after {
 }
 
 @keyframes cardShake {
-    0%, 100% { transform: rotateY(180deg) translateX(0); }
-    20% { transform: rotateY(180deg) translateX(-6px) rotate(-2deg); }
-    40% { transform: rotateY(180deg) translateX(6px) rotate(2deg); }
-    60% { transform: rotateY(180deg) translateX(-4px) rotate(-1deg); }
-    80% { transform: rotateY(180deg) translateX(4px) rotate(1deg); }
+    0%, 100% { transform: perspective(600px) rotateY(180deg) translateX(0); }
+    20% { transform: perspective(600px) rotateY(180deg) translateX(-6px) rotate(-2deg); }
+    40% { transform: perspective(600px) rotateY(180deg) translateX(6px) rotate(2deg); }
+    60% { transform: perspective(600px) rotateY(180deg) translateX(-4px) rotate(-1deg); }
+    80% { transform: perspective(600px) rotateY(180deg) translateX(4px) rotate(1deg); }
 }
 
 /* ========================================
