@@ -449,7 +449,6 @@ body::after {
     height: var(--card-size);
     cursor: pointer;
     transform-style: preserve-3d;
-    transition: transform var(--transition-normal);
     animation: cardAppear 0.4s ease backwards;
 }
 
