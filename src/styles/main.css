@@ -575,13 +575,12 @@ body::after {
     50% { transform: scale(1.12); }
 }
 
-.card:hover:not(.flipped):not(.matched) .card-inner {
-    transform: rotateY(12deg);
+.card:hover:not(.flipped):not(.matched) {
     filter: brightness(1.05);
 }
 
-.card:active:not(.flipped):not(.matched) .card-inner {
-    transform: rotateY(8deg) scale(0.97);
+.card:active:not(.flipped):not(.matched) {
+    filter: brightness(0.97);
 }
 
 .card.matched {

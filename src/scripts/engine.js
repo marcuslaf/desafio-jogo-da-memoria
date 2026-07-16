@@ -331,15 +331,13 @@
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -12;
-            const rotateY = ((x - centerX) / centerX) * 12;
-            card.querySelector(".card-inner").style.transform =
-                `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+            card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
         card.addEventListener("mouseleave", function () {
-            if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
-            card.querySelector(".card-inner").style.transform = "";
+            card.style.transform = "";
         });
     }
 
@@ -400,7 +398,6 @@
         }
 
         playFlipSound();
-        card.querySelector(".card-inner").style.transform = "";
         card.classList.add("flipped");
         card.setAttribute("aria-label", `Carta, ${card.dataset.emoji}`);
         openCards.push(card);
