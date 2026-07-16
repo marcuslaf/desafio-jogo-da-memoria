@@ -400,6 +400,7 @@
         }
 
         playFlipSound();
+        card.querySelector(".card-inner").style.transform = "";
         card.classList.add("flipped");
         card.setAttribute("aria-label", `Carta, ${card.dataset.emoji}`);
         openCards.push(card);
