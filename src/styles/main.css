@@ -1052,6 +1052,10 @@ body::after {
         transition-duration: 0.01ms !important;
     }
 
+    .card-inner {
+        transition-duration: 0.2s !important;
+    }
+
     body {
         animation: none;
     }
