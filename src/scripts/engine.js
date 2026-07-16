@@ -333,11 +333,13 @@
             const centerY = rect.height / 2;
             const rotateX = ((y - centerY) / centerY) * -10;
             const rotateY = ((x - centerX) / centerX) * 10;
-            card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            card.style.setProperty("--tx", rotateX + "deg");
+            card.style.setProperty("--ty", rotateY + "deg");
         });
 
         card.addEventListener("mouseleave", function () {
-            card.style.transform = "";
+            card.style.setProperty("--tx", "0deg");
+            card.style.setProperty("--ty", "0deg");
         });
     }
 
@@ -398,7 +400,8 @@
         }
 
         playFlipSound();
-        card.style.transform = "";
+        card.style.setProperty("--tx", "0deg");
+        card.style.setProperty("--ty", "0deg");
         card.classList.add("flipped");
         card.setAttribute("aria-label", `Carta, ${card.dataset.emoji}`);
         openCards.push(card);
@@ -439,8 +442,10 @@
                 setTimeout(function () {
                     card1.classList.remove("flipped", "shake");
                     card2.classList.remove("flipped", "shake");
-                    card1.style.transform = "";
-                    card2.style.transform = "";
+                    card1.style.setProperty("--tx", "0deg");
+                    card1.style.setProperty("--ty", "0deg");
+                    card2.style.setProperty("--tx", "0deg");
+                    card2.style.setProperty("--ty", "0deg");
                     card1.setAttribute("aria-label", "Carta, oculta");
                     card2.setAttribute("aria-label", "Carta, oculta");
                     openCards = [];
