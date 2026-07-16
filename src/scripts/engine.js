@@ -398,6 +398,7 @@
         }
 
         playFlipSound();
+        card.style.transform = "";
         card.classList.add("flipped");
         card.setAttribute("aria-label", `Carta, ${card.dataset.emoji}`);
         openCards.push(card);
@@ -438,8 +439,8 @@
                 setTimeout(function () {
                     card1.classList.remove("flipped", "shake");
                     card2.classList.remove("flipped", "shake");
-                    card1.querySelector(".card-inner").style.transform = "";
-                    card2.querySelector(".card-inner").style.transform = "";
+                    card1.style.transform = "";
+                    card2.style.transform = "";
                     card1.setAttribute("aria-label", "Carta, oculta");
                     card2.setAttribute("aria-label", "Carta, oculta");
                     openCards = [];
