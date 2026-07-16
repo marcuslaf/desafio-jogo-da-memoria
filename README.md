@@ -74,7 +74,7 @@ cd jogo-da-memoria
 
 ## Deploy
 
-Este projeto está hospedado na [Vercel](https://vercel.com).
+Este projeto está hospedado na [Vercel](https://desafio-jogo-da-memoria.vercel.app).
 
 ---
 
